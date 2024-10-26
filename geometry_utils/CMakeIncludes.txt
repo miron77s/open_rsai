@@ -1,0 +1,5 @@
+set(Boost_USE_MULTITHREADED ON)
+find_package(Boost COMPONENTS geometry)
+
+include_directories(${Boost_INCLUDE_DIRS})
+

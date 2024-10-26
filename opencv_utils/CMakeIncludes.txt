@@ -1,0 +1,5 @@
+find_package(OpenCV REQUIRED)
+include_directories(${OPENCV_INCLUDE_DIRS})
+
+find_package(GDAL REQUIRED)
+include_directories(${GDAL_INCLUDE_DIR})

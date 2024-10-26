@@ -1,0 +1,2 @@
+sh ./scripts/vector_composer.sh ./vector/Kursk/eastern_industrial_w/updater.shp ./vector/Kursk/eastern_industrial_w/updating.shp ./composite/ vector_composite_on_raster "4033053.7 6720432.3 4034968.2 6718771.9" ./raster/Kursk/Bing_19_3395.tif
+sh ./scripts/vector_composer.sh ./vector/Kursk/eastern_industrial_w/updater.shp ./vector/Kursk/eastern_industrial_w/updating.shp ./composite/ vector_composite_with_alpha "4033053.7 6720432.3 4034968.2 6718771.9"

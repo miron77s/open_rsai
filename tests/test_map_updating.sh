@@ -1,0 +1,1 @@
+./map_updater -v ./vector/Kursk/eastern_industrial_w/inliers.shp -u ./vector/Kursk/eastern_industrial_w/updating.shp -i ./vector/Kursk/eastern_industrial_w/update_mask.shp -o ./vector/update_test/ --save_diff --save_updated
