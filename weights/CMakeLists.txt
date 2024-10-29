@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-project(pretrained_downloads)
+project(weights_download)
 
 function(download_file url filename destination)
     # Ensure the destination directory exists
@@ -30,8 +30,6 @@ endfunction()
 # Example usage of the function to download multiple files
 set(DOWNLOAD_DIR "${CMAKE_BINARY_DIR}/downloaded_files")
 
-download_file("https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/q7You6rbq7NKrA" "mask_rcnn_green_0073.h5" ${DOWNLOAD_DIR})
-download_file("https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/VBgbcaBENbPMZQ" "mask_rcnn_hydro_0115.h5" ${DOWNLOAD_DIR})
 download_file("https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/ma9Tnty6XVqN0A" "yolov4-buildings-15k_final.weights" ${DOWNLOAD_DIR})
 download_file("https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/ZHxgeiE3c447Tg" "yolov4-buildings-15k.cfg" ${DOWNLOAD_DIR})
 download_file("https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth" "sam_vit_h_4b8939.pth" ${DOWNLOAD_DIR})
