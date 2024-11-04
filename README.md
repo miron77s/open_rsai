@@ -1,5 +1,9 @@
 # Open Remote Sensing AI Library Core (OpenRSAI-Core)
 
+## Description
+
+The OpenRSAI-Core library contains custom Eigen-powered geodata handlers, building's models on remote sensing imagery, algorithms for their detection and reconstruction (roof+projection+shade extraction) and training datasets preparing basics.
+
 ## Requirements
 
 This project requires a number of dependencies to be installed on your system. All instructions below are tailored for Ubuntu 22.04 users. If you are using a different operating system, please adjust the commands accordingly.
