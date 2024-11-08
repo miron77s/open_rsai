@@ -41,14 +41,18 @@ For more information about `Segment-Anything` setup, see the [Installation secti
 
 The root CMakeLists.txt automatically list all repository contents and build each item with `add_subdirectory`. Do not forget to pass your actual installation path to `CMAKE_INSTALL_PREFIX`. The build directory `build` also can be changed accoring preferences.
 
+Before compiling check [Darknet configuration section](https://github.com/AlexeyAB/darknet?tab=readme-ov-file#how-to-compile-on-linux-using-make) for GPU, CUDNN support and architecture.
+
 ```
 git clone https://github.com/miron77s/open_rsai
 git submodule update --init --recursive
 cd open_rsai
-cmake -S . -B build -DCMAKE_INSTALL_PREFIX=../open_rsai_distr
-cmake --build build
+cmake -S . -B build -DCMAKE_INSTALL_PREFIX=../open_rsai_distr -DENABLE_INSTALLER=ON
+cmake --build build --parallel ${nproc}
 cmake --install build
 ```
+
+`ENABLE_INSTALLER` flag is designated to Darknet library enabling it install to `CMAKE_INSTALL_PREFIX` path.
 
 ## Special Thanks
 

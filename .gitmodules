@@ -1,3 +1,6 @@
 [submodule "args-parser"]
 	path = args-parser
 	url = https://github.com/igormironchik/args-parser.git
+[submodule "darknet"]
+	path = darknet
+	url = https://github.com/AlexeyAB/darknet

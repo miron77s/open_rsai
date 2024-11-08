@@ -16,6 +16,8 @@ set(SOURCES
 
 add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 
+set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
+
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
 target_link_libraries(
@@ -24,8 +26,8 @@ target_link_libraries(
                         eigen_utils
                         opencv_utils
                         threading_utils
-                        markup
                         building_models
+                        markup
                         projection_and_shade_locator_functional
 )
 
