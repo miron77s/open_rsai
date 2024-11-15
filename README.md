@@ -15,7 +15,7 @@ Before installing the Python-specific dependencies, you need to install some sys
 ```
 sudo apt-get update
 sudo apt-get --yes install gcc g++ make cmake wget libgdal-dev libopencv-dev libeigen3-dev libboost-dev
-sudo apt-get --yes install python3 python3-pip git
+sudo apt-get --yes install python3 python3-pip git mesa-common-dev
 ```
 
 ### Segment-Anything
@@ -45,14 +45,19 @@ Before compiling check [Darknet configuration section](https://github.com/Alexey
 
 ```
 git clone https://github.com/miron77s/open_rsai
-git submodule update --init --recursive
 cd open_rsai
+git submodule update --init --recursive
 cmake -S . -B build -DCMAKE_INSTALL_PREFIX=../open_rsai_distr -DENABLE_INSTALLER=ON
 cmake --build build --parallel ${nproc}
 cmake --install build
 ```
 
 `ENABLE_INSTALLER` flag is designated to Darknet library enabling it install to `CMAKE_INSTALL_PREFIX` path.
+
+Make sure that CUDA library binaries are available in `LD_LIBRARY_PATH` overvise you will be facing linker error. If so add libraries path to `LD_LIBRARY_PATH`:
+```
+export LD_LIBRARY_PATH=/usr/local/cuda-11.8/compat/:$LD_LIBRARY_PATH
+```
 
 ## Special Thanks
 
