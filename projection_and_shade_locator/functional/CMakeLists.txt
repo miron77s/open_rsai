@@ -22,7 +22,7 @@ set(SOURCES
     src/sam_segmentor.cpp
   )
 
-add_library(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+add_library(${PROJECT_NAME} STATIC ${SOURCES} ${HEADERS})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES LINKER_LANGUAGE CXX)
 

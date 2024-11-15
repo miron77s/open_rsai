@@ -27,7 +27,7 @@ set(SOURCES
     src/building_renderer.cpp
 )
 
-add_library(${PROJECT_NAME} ${HEADERS} ${SOURCES})
+add_library(${PROJECT_NAME} STATIC ${HEADERS} ${SOURCES})
 
 target_include_directories(${PROJECT_NAME} PUBLIC include)
 
