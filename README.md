@@ -8,6 +8,14 @@ The OpenRSAI-Core library contains custom Eigen-powered geodata handlers, buildi
 
 This project requires a number of dependencies to be installed on your system. All instructions below are tailored for Ubuntu 22.04 users. If you are using a different operating system, please adjust the commands accordingly.
 
+### Hardware
+
+OpenRSAI-Core utilities can be run in both classic and AI modes:
+
+ - Classic mode uses classic machine learning techniques and does not require GPU support. The only requirement is at least 16 Gb RAM.
+ - AI mode for inference require at least NVIDIA GeForce 3060 (minimum 8Gb GPU memory).
+ - AI mode for buildings' detector training requires NVIDIA GeForce 4090 (24Gb GPU memory) for Yolo configuration, provided in this repository. For training on other GPUs modify Yolo configuration file according the following [guide](https://github.com/AlexeyAB/darknet?tab=readme-ov-file#how-to-train-to-detect-your-custom-objects).
+
 ### System Packages
 
 Before installing the Python-specific dependencies, you need to install some system packages using `apt-get`. Open a terminal and run the following commands:
