@@ -35,3 +35,13 @@ download_file("https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/ZH
 download_file("https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth" "sam_vit_h_4b8939.pth" ${DOWNLOAD_DIR})
 download_file("https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137" "yolov4.conv.137" ${DOWNLOAD_DIR})
 
+# install darknet fonts
+set(LABELS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/darknet/data/labels")
+if(IS_DIRECTORY "${LABELS_DIR}")
+
+  install(DIRECTORY "${LABELS_DIR}"
+    DESTINATION "${CMAKE_INSTALL_PREFIX}/bin"
+    FILES_MATCHING PATTERN "*"
+  )
+
+endif()
