@@ -30,7 +30,8 @@ bool rsai::markup::yolo_writer::save ( const tiles &tls, const std::string &path
     const std::string images_ext = ".jpg";
     const std::string markup_ext = ".txt";
 
-    const auto dataset_name = std::filesystem::path ( path ).filename().string();
+    //const auto dataset_name = std::filesystem::path ( path ).filename().string();
+    const auto dataset_name = path;
 
     const auto markup_dir = markup_part_folder_names [part];
     const std::string tiles_folder = markup_dir;
@@ -179,7 +180,8 @@ bool rsai::markup::yolo_writer::__write_data_file ( const std::string &path ) co
     const std::string index_ext = ".txt";
     const std::string data_file = "rsai.data";
     const std::string data_path = path + "/" + data_file;
-    const auto dataset_name = std::filesystem::path ( path ).filename().string();
+    //const auto dataset_name = std::filesystem::path ( path ).filename().string();
+    const auto dataset_name = path;
     std::ofstream file (data_path);
     if ( !file.is_open () )
     {
