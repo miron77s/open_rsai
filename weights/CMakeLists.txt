@@ -33,3 +33,5 @@ set(DOWNLOAD_DIR "${CMAKE_BINARY_DIR}/downloaded_files")
 download_file("https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/ma9Tnty6XVqN0A" "yolov4-buildings-15k_final.weights" ${DOWNLOAD_DIR})
 download_file("https://getfile.dokpub.com/yandex/get/https://disk.yandex.ru/d/ZHxgeiE3c447Tg" "yolov4-buildings-15k.cfg" ${DOWNLOAD_DIR})
 download_file("https://dl.fbaipublicfiles.com/segment_anything/sam_vit_h_4b8939.pth" "sam_vit_h_4b8939.pth" ${DOWNLOAD_DIR})
+download_file("https://github.com/AlexeyAB/darknet/releases/download/darknet_yolo_v3_optimal/yolov4.conv.137" "yolov4.conv.137" ${DOWNLOAD_DIR})
+
