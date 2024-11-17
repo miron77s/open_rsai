@@ -36,12 +36,16 @@ bool rsai::markup::yolo_writer::save ( const tiles &tls, const std::string &path
     const auto markup_dir = markup_part_folder_names [part];
     const std::string tiles_folder = markup_dir;
     const auto tiles_path = path + "/" + tiles_folder + "/";
+    const auto backup_path = path + "/backup/";
 
     if ( mode == write_mode::replace )
         std::filesystem::remove_all ( path );
 
     if ( !std::filesystem::exists ( tiles_path ) )
         std::filesystem::create_directories( tiles_path );
+
+    if ( !std::filesystem::exists ( backup_path ) )
+        std::filesystem::create_directories( backup_path );
 
     const auto index_path = path + "/" + markup_dir + markup_ext;
     std::ofstream index_file ( index_path, ( mode == write_mode::append ) ? std::ios_base::app : std::ios_base::trunc );
