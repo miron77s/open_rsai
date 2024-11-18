@@ -75,14 +75,14 @@ sh download_all.sh
 
 ## Обучение и тестирование детектора зданий и сооружений
 
-1. Создать обучающую выборку для детектирования крыш зданий и сооружений:
+1. Создать обучающую выборку для детектирования зданий и сооружений:
 
 ```
 cd ../bin
 ./markup_writer -r ../data/raster/Kursk/Bing_19_3395.tif,../data/raster/Kursk/Google_19_3395.tif,../data/raster/Kursk/Mapbox_19_3395.tif,../data/raster/Kursk/Yandex_19_3395.tif -v ../data/buildings/vector/Kursk/eastern_industrial_en/,../data/buildings/vector/Kursk/eastern_industrial_es/,../data/buildings/vector/Kursk/eastern_industrial_w/,../data/buildings/vector/Kursk/eastern_region/,../data/buildings/vector/Kursk/k3t3_e/,../data/buildings/vector/Kursk/k3t3_w,../data/buildings/vector/Kursk/klykova_plevitskaya/ -o ../data/buildings/markup_roofs/ -b 0.4 -c roofs -d ../data/buildings/vector/forbidden/forbidden.shp --format yolo -m replace -t 608x608
 ```
 
-2. Обучить детектор крыш зданий и сооружений:
+2. Обучить детектор зданий и сооружений:
 
 ```
 ./darknet detector train ../data/buildings/markup_roofs/rsai.data ./weights/yolov4-buildings-15k.cfg ./weights/yolov4.conv.137
@@ -91,7 +91,7 @@ cd ../bin
 
 В комплекте библиотеки присутствуют предобученные веса детекатора зданий и сооружений, поэтому данный этап является необязательным.
 
-3. Протестировать точность (IoU) детектирования крыш зданий и сооружений на валидационной выборке, на которой сеть не обучалась.
+3. Протестировать точность (IoU) детектирования зданий и сооружений на валидационной выборке, на которой сеть не обучалась.
 
 Для весов, полученных в результате обучения:
 
@@ -105,7 +105,7 @@ cd ../bin
 ./darknet detector map ../data/buildings/markup_roofs/rsai.data ./weights/yolov4-buildings-15k.cfg ./weights/yolov4-buildings-15k_final.weights
 ```
 
-4. Протестировать детектирование крыш зданий и сооружений на отдельно взятом валидационном примере:
+4. Протестировать детектирование зданий и сооружений на отдельно взятом валидационном примере:
 
 Для весов, полученных в результате обучения:
 
@@ -120,3 +120,45 @@ cd ../bin
 ```
 
 Важно. Нумерация изображения в сгенерированной выборке может отличаться, поэтому в случае отсутсвия снимка `Kursk_Bing_19_3395_7914.jpg` следует использовать любой другой из каталога `../data/buildings/markup_roofs/valid/` с непустым файлом аннотации `Kursk_Bing_19_3395_NNNN.txt` (значит на изображении должны присутствовать зданий или сооружения).
+
+## Автоматическое построение карт зданий и сооружений
+
+1. Выполнить подготовку рабочей области для каждого из используемых для детектирования растров:
+
+```
+./raster_inliers_extractor -r ../data/raster/Kursk/Bing_19_3395.tif -v ../data/buildings/vector/osm/inliers.shp -i ../data/buildings/vector/Kursk/western_1/roi.shp -o ../data/buildings/vector/Kursk/western_1/ -f
+./objects_bounds_finder -r ../data/raster/Kursk/Bing_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/inliers.shp --metadata ../data/buildings/vector/Kursk/western_1/Bing_19_3395/meta.shp -o ../data/buildings/vector/Kursk/western_1/Bing_19_3395/ --mask 50 --max_proj_length 80 -f
+./objects_bounds_finder -r ../data/raster/Kursk/Google_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/inliers.shp --metadata ../data/buildings/vector/Kursk/western_1/Google_19_3395/meta.shp -o ../data/buildings/vector/Kursk/western_1/Google_19_3395/ --mask 50 --max_proj_length 80 -f
+./objects_bounds_finder -r ../data/raster/Kursk/Mapbox_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/inliers.shp --metadata ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/meta.shp -o ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/ --mask 50 --max_proj_length 80 -f
+./objects_bounds_finder -r ../data/raster/Kursk/Yandex_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/inliers.shp --metadata ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/meta.shp -o ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/ --mask 50 --max_proj_length 80 -f
+```
+
+2. Выполнить детектирование крыш зданий на снимках:
+
+```
+./roof_locator -r ../data/raster/Kursk/Bing_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Bing_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Bing_19_3395/ -f --use_sam
+./roof_locator -r ../data/raster/Kursk/Google_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Google_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Google_19_3395/ -f --use_sam
+./roof_locator -r ../data/raster/Kursk/Mapbox_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/ -f --use_sam
+./roof_locator -r ../data/raster/Kursk/Yandex_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/ -f --use_sam
+```
+
+3. Провести мультипроекционную реконструкцию зданий и сооружений (с комплексированием):
+
+```
+./multiview_building_reconstructor -r ../data/raster/Kursk/Bing_19_3395.tif,../data/raster/Kursk/Google_19_3395.tif,../data/raster/Kursk/Mapbox_19_3395.tif,../data/raster/Kursk/Yandex_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Bing_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Google_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/roofs.shp -b ../data/buildings/vector/Kursk/western_1/Bing_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Google_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Bing_19_3395/,../data/buildings/vector/Kursk/western_1/Google_19_3395/,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/ -f
+```
+
+4. Проверить результаты детектирования и реконструкции в QGIS, последовательно выполняя следующие команды:
+
+```
+qgis --code ../data/buildings/vector/Kursk/western_1/Bing_19_3395/open_in_qgis.py
+```
+```
+qgis --code ../data/buildings/vector/Kursk/western_1/Google_19_3395/open_in_qgis.py
+```
+```
+qgis --code ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/open_in_qgis.py
+```
+```
+qgis --code ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/open_in_qgis.py
+```
