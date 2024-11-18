@@ -162,3 +162,33 @@ qgis --code ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/open_in_qgis
 ```
 qgis --code ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/open_in_qgis.py
 ```
+
+## Создание мультивременных композитных изображений
+
+1. Создать растровый мультивременной композит в синем цветовом канале и отобразить его в QGIS:
+
+```
+sh ./scripts/raster_composer.sh "../data/raster/Kursk/Mapbox_19_3395.tif" "../data/raster/Kursk/Bing_19_3395.tif" "../data/composite/" "4020549.6 6718068.8 4023724.3 6715727.0" "raster_composite" blue
+qgis ../data/composite/raster_composite_blue.tif 
+```
+
+2. Создать растровый мультивременной композит в красном цветовом канале и отобразить его в QGIS:
+
+```
+sh ./scripts/raster_composer.sh "../data/raster/Kursk/Mapbox_19_3395.tif" "../data/raster/Kursk/Bing_19_3395.tif" "../data/composite/" "4020549.6 6718068.8 4023724.3 6715727.0" "raster_composite" red
+qgis ../data/composite/raster_composite_red.tif 
+```
+
+3. Создать векторное композитное изображение с каналом прозрачности поверх растра:
+
+```
+sh ./scripts/vector_composer.sh ../data/buildings/vector/Kursk/eastern_industrial_w/updater.shp ../data/buildings/vector/Kursk/eastern_industrial_w/updating.shp ../data/composite/ vector_composite "4033053.7 6720432.3 4034968.2 6718771.9"
+qgis ../data/raster/Kursk/Bing_19_3395.tif ../data/composite/vector_composite.tif
+``` 
+
+4. Создать и отобразить растр-векторное мультивременное композитное изображение:
+
+```
+sh ./scripts/vector_composer.sh ../data/buildings/vector/Kursk/eastern_industrial_w/updater.shp ../data/buildings/vector/Kursk/eastern_industrial_w/updating.shp ../data/composite/ vector_composite_on_raster "4033053.7 6720432.3 4034968.2 6718771.9" ../data/raster/Kursk/Bing_19_3395.tif
+qgis ../data/composite/vector_composite_on_raster.tif
+```
