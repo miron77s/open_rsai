@@ -192,3 +192,13 @@ qgis ../data/raster/Kursk/Bing_19_3395.tif ../data/composite/vector_composite.ti
 sh ./scripts/vector_composer.sh ../data/buildings/vector/Kursk/eastern_industrial_w/updater.shp ../data/buildings/vector/Kursk/eastern_industrial_w/updating.shp ../data/composite/ vector_composite_on_raster "4033053.7 6720432.3 4034968.2 6718771.9" ../data/raster/Kursk/Bing_19_3395.tif
 qgis ../data/composite/vector_composite_on_raster.tif
 ```
+## Cопоставление детектированных объектов с опорной цифровой
+
+Выполнить и визуализировать результаты сопоставления детектированных объектов `updater.shp` c опорными данными `updating.shp` согласно маске сопоставления `update_mask.shp`:
+
+./map_updater -v ../data/buildings/vector/Kursk/eastern_industrial_w/updater.shp -u ../data/buildings/vector/Kursk/eastern_industrial_w/updating.shp -i ../data/buildings/vector/Kursk/eastern_industrial_w/update_mask.shp -o ../data/detect_differences/ --save_diff --save_updated
+qgis ../data/detect_differences/upcomming.shp ../data/detect_differences/outdated.shp
+
+В результате формируется 2 карты: 
+- карта новых объектов `upcomming.shp`, не присутствовавших на опорной карте;
+- карта устаревших объектов `outdated.shp`.
