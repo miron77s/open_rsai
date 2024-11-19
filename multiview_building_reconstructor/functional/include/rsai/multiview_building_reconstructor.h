@@ -23,6 +23,7 @@ namespace rsai
                                         , const double roof_position_walk
                                         , const int roof_variants
                                         , const int shade_variants
+                                        , const double height_factor
                                         , const bool force_rewrite
                                         , const bool use_sam = false
                                         , run_mode mode = run_mode::automatic

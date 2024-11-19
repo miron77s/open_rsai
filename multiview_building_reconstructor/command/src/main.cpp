@@ -49,6 +49,8 @@ int main ( int argc, char * argv[] )
 
         Args::Arg & roof_position_walk_param = arguments::get_roof_position_walk ();
 
+        Args::Arg & height_factor_param = arguments::get_height_factor ();
+
         Args::Arg & roof_variants_param = arguments::get_roof_varians();
 
         Args::Arg & shade_variants_param = arguments::get_shade_varians();
@@ -71,6 +73,7 @@ int main ( int argc, char * argv[] )
         cmd.addArg ( driver_param );
         cmd.addArg ( segmentize_step_param );
         cmd.addArg ( projection_step_param );
+        cmd.addArg ( height_factor_param );
         cmd.addArg ( force_rewtire_param );
         cmd.addArg ( run_mode_param );
         cmd.addArg ( interaction_mode_param );
@@ -167,7 +170,12 @@ int main ( int argc, char * argv[] )
 
         // Building model projection step value
         value_helper < int > projection_step_helper         ( projection_step_param.value() );
-        if ( !projection_step_helper.verify ( std::cerr,    "STOP: Building model projection step value are incorrect." ) )
+        if ( !projection_step_helper.verify ( std::cerr,    "STOP: Building model projection step value is incorrect." ) )
+            return 1;
+
+        // Building model projection step value
+        value_helper < double > height_factor_helper        ( height_factor_param.value() );
+        if ( !height_factor_helper.verify ( std::cerr,      "STOP: Orbital height factor is incorrect." ) )
             return 1;
 
         // Building model roof position walk value
@@ -184,11 +192,12 @@ int main ( int argc, char * argv[] )
         if ( !shade_variants_helper.verify ( std::cerr,      "STOP: Building model roof variants value is incorrect." ) )
             return 1;
 
-        const double segmentize_step = segmentize_step_helper.value();
-        const int projection_step = projection_step_helper.value();
+        const double segmentize_step    = segmentize_step_helper.value();
+        const int projection_step       = projection_step_helper.value();
         const double roof_position_walk = roof_position_walk_helper.value();
-        const int roof_variants = roof_variants_helper.value();
-        const int shade_variants = shade_variants_helper.value();
+        const int roof_variants         = roof_variants_helper.value();
+        const int shade_variants        = shade_variants_helper.value();
+        const double height_factor      = height_factor_helper.value();
 
         const auto run_mode = rsai::run_mode_from_string ( run_mode_param.value() );
         const auto interaction_mode = rsai::interaction_mode_from_string ( interaction_mode_param.value() );
@@ -215,6 +224,7 @@ int main ( int argc, char * argv[] )
                                               , roof_position_walk
                                               , roof_variants
                                               , shade_variants
+                                              , height_factor
                                               , force_rewtire_param.isDefined ()
                                               , use_sam_param.isDefined()
                                               , run_mode

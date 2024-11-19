@@ -39,6 +39,7 @@
 #define DEFAULT_SEGMENTIZE_STEP_VALUE       "1.0"
 #define DEFAULT_PROJECTION_STEP_VALUE       "1.0"
 #define DEFAULT_ROOF_POSITION_WALK_VALUE    "15.0"
+#define DEFAULT_HEIGHT_FACTOR_VALUE         "0.0"
 #define DEFAULT_ROOF_VARIANTS_VALUE         "20"
 #define DEFAULT_SHADE_VARIANTS_VALUE        "5"
 #define DEFAULT_RECONSTRUCTION_MODE         "auto"
@@ -57,6 +58,7 @@
 #define DEFAULT_MARKUP_REPLACE_MODE         "replace"
 
 #define DEFAULT_OBJECT_ID_FIELD_NAME        "FID"
+#define DEFAULT_OBJECT_HEIGHT_FIELD_NAME    "height"
 
 #define DEFAULT_META_TYPE_FIELD_NAME        "type"
 #define DEFAULT_PROJECTION_FIELD_VALUE      "projection"

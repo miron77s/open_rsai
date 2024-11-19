@@ -232,6 +232,17 @@ Args::Arg & arguments_t < Dummy >::get_roof_position_walk ()
 }
 
 template < class Dummy >
+Args::Arg & arguments_t < Dummy >::get_height_factor ()
+{
+    static Args::Arg height_factor_param( SL( 'h' ), SL( "height_factor" ), true, false );
+    height_factor_param.setDescription( std::string( "Height factor defined by orbital params on shooting in m/pixel. "
+                                                          "The default is " ) + DEFAULT_HEIGHT_FACTOR_VALUE + " m/pixel. ");
+    height_factor_param.setDefaultValue ( DEFAULT_HEIGHT_FACTOR_VALUE );
+
+    return height_factor_param;
+}
+
+template < class Dummy >
 Args::Arg & arguments_t < Dummy >::get_roof_varians ()
 {
     static Args::Arg roof_varians_param( SL( 'k' ), SL( "roof_varians" ), true, false );

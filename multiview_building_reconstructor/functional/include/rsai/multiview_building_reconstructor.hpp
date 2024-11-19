@@ -46,6 +46,7 @@ rsai::multiview_building_reconstructor::multiview_building_reconstructor (
                                                                    , const double roof_position_walk
                                                                    , const int roof_variants
                                                                    , const int shade_variants
+                                                                   , const double height_factor
                                                                    , const bool force_rewrite
                                                                    , const bool use_sam
                                                                    , run_mode a_run_mode
@@ -285,6 +286,7 @@ rsai::multiview_building_reconstructor::multiview_building_reconstructor (
             struct map_item
             {
                 int object_index = 0;
+                int length = -1;
                 std::map < int, gdal::multipolygon > projes;
                 std::map < int, gdal::multipolygon > shades;
             };
@@ -421,8 +423,7 @@ rsai::multiview_building_reconstructor::multiview_building_reconstructor (
                                 item.object_index = std::stoi ( obj_id );
                                 item.projes [i] = proj_world;
                                 item.shades [i] = shade_world;
-
-
+                                item.length = structures [current_structure_index].length;
                             }
                         }
 
@@ -498,6 +499,12 @@ rsai::multiview_building_reconstructor::multiview_building_reconstructor (
 
                 shade_layer << gdal::field_definition ( DEFAULT_OBJECT_ID_FIELD_NAME, OFTInteger );
 
+                if ( height_factor > 0.0 )
+                {
+                    proj_layer << gdal::field_definition ( DEFAULT_OBJECT_HEIGHT_FIELD_NAME, OFTReal );
+                    shade_layer << gdal::field_definition ( DEFAULT_OBJECT_HEIGHT_FIELD_NAME, OFTReal );
+                }
+
                 proj_layer_iters.emplace_back ( proj_layer );
                 shade_layer_iters.emplace_back ( shade_layer );
             }
@@ -518,11 +525,15 @@ rsai::multiview_building_reconstructor::multiview_building_reconstructor (
                     gdal::shared_feature proj_feature ( proj_layer_iters [layer_index].layer()->GetLayerDefn() );
                     proj_feature->SetGeometry ( proj_pair.second.get () );
                     proj_feature->SetField ( DEFAULT_OBJECT_ID_FIELD_NAME, item.object_index );
+                    if ( height_factor > 0.0 )
+                        proj_feature->SetField ( DEFAULT_OBJECT_ID_FIELD_NAME, item.length * height_factor );
                     proj_layer_iters [layer_index].set_feature( proj_feature );
 
                     gdal::shared_feature shade_feature ( shade_layer_iters [layer_index].layer()->GetLayerDefn() );
                     shade_feature->SetGeometry ( shade_iter->second.get () );
                     shade_feature->SetField ( DEFAULT_OBJECT_ID_FIELD_NAME, item.object_index );
+                    if ( height_factor > 0.0 )
+                        shade_feature->SetField ( DEFAULT_OBJECT_ID_FIELD_NAME, item.length * height_factor );
                     shade_layer_iters [layer_index].set_feature( shade_feature );
                 }
             }

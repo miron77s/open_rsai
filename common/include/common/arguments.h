@@ -1,6 +1,6 @@
 #pragma once
 
-#include <args-parser/args-parser/all.hpp>
+//#include <args-parser/args-parser/all.hpp>
 
 template < class Dummy = int >
 class arguments_t
@@ -33,6 +33,7 @@ public:
     static Args::Arg & get_run_mode ();
     static Args::Arg & get_interaction_mode ();
     static Args::Arg & get_roof_position_walk ();
+    static Args::Arg & get_height_factor ();
     static Args::Arg & get_roof_varians ();
     static Args::Arg & get_shade_varians ();
     static Args::Arg & get_use_sam ();
