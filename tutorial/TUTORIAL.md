@@ -145,7 +145,7 @@ cd ../bin
 3. Провести мультипроекционную реконструкцию зданий и сооружений (с комплексированием):
 
 ```
-./multiview_building_reconstructor -r ../data/raster/Kursk/Bing_19_3395.tif,../data/raster/Kursk/Google_19_3395.tif,../data/raster/Kursk/Mapbox_19_3395.tif,../data/raster/Kursk/Yandex_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Bing_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Google_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/roofs.shp -b ../data/buildings/vector/Kursk/western_1/Bing_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Google_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Bing_19_3395/,../data/buildings/vector/Kursk/western_1/Google_19_3395/,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/ -f
+./multiview_building_reconstructor -r ../data/raster/Kursk/Bing_19_3395.tif,../data/raster/Kursk/Google_19_3395.tif,../data/raster/Kursk/Mapbox_19_3395.tif,../data/raster/Kursk/Yandex_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Bing_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Google_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/roofs.shp -b ../data/buildings/vector/Kursk/western_1/Bing_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Google_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Bing_19_3395/,../data/buildings/vector/Kursk/western_1/Google_19_3395/,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/ -f --height_factor 0.4
 ```
 
 4. Проверить результаты детектирования и реконструкции в QGIS, последовательно выполняя следующие команды:
@@ -162,6 +162,7 @@ qgis --code ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/open_in_qgis
 ```
 qgis --code ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/open_in_qgis.py
 ```
+В процессе проверки убедиться в наличии значений высот объектов (поле "height") в слоях "projes" и "shades".
 
 ## Создание мультивременных композитных изображений
 
