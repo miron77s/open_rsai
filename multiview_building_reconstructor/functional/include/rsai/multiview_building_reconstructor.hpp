@@ -526,14 +526,14 @@ rsai::multiview_building_reconstructor::multiview_building_reconstructor (
                     proj_feature->SetGeometry ( proj_pair.second.get () );
                     proj_feature->SetField ( DEFAULT_OBJECT_ID_FIELD_NAME, item.object_index );
                     if ( height_factor > 0.0 )
-                        proj_feature->SetField ( DEFAULT_OBJECT_ID_FIELD_NAME, item.length * height_factor );
+                        proj_feature->SetField ( DEFAULT_OBJECT_HEIGHT_FIELD_NAME, item.length * height_factor );
                     proj_layer_iters [layer_index].set_feature( proj_feature );
 
                     gdal::shared_feature shade_feature ( shade_layer_iters [layer_index].layer()->GetLayerDefn() );
                     shade_feature->SetGeometry ( shade_iter->second.get () );
                     shade_feature->SetField ( DEFAULT_OBJECT_ID_FIELD_NAME, item.object_index );
                     if ( height_factor > 0.0 )
-                        shade_feature->SetField ( DEFAULT_OBJECT_ID_FIELD_NAME, item.length * height_factor );
+                        shade_feature->SetField ( DEFAULT_OBJECT_HEIGHT_FIELD_NAME, item.length * height_factor );
                     shade_layer_iters [layer_index].set_feature( shade_feature );
                 }
             }
