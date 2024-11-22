@@ -203,3 +203,67 @@ qgis ../data/detect_differences/upcomming.shp ../data/detect_differences/outdate
 В результате формируется 2 карты: 
 - карта новых объектов `upcomming.shp`, не присутствовавших на опорной карте;
 - карта устаревших объектов `outdated.shp`.
+
+## Обучение и тестирование детектора гидрографии
+
+1. Активировать окружение `open_rsai_detectors`
+
+```
+conda activate open_rsai_detectors
+```
+
+2. Запустить скрипт обучения детектора 
+
+```
+python ./train_scripts/train_hydro.py ../data/hydro/markup/water_all/ ./weights/mask_rcnn_coco.h5
+```
+Важно. Весовые коэффициенты при обучении будут сохранены в каталог "hydro`yyyyMMdd`T`HHmm`", где yyyy-MM-dd HH:mm - дата и время создания каталога.
+
+3. Деактивировать окружение `open_rsai_detectors`
+
+```
+conda deactivate
+```
+
+
+## Обучение и тестирование детектора растительности
+
+1. Активировать окружение `open_rsai_detectors`
+
+```
+conda activate open_rsai_detectors
+```
+
+2. Запустить скрипт обучения детектора 
+
+```
+python ./train_scripts/train_green.py ../data/hydro/markup/vegetation_all/ ./weights/mask_rcnn_coco.h5
+```
+
+Важно. Весовые коэффициенты при обучении будут сохранены в каталог "green`yyyyMMdd`T`HHmm`", где yyyy-MM-dd HH:mm - дата и время создания каталога.
+
+3. Деактивировать окружение `open_rsai_detectors`
+
+```
+conda deactivate
+```
+
+## Детектирование гидрографии
+
+1. Активировать окружение `open_rsai_detectors`
+
+```
+conda activate open_rsai_detectors
+```
+
+2. Запустить скрипт детектирования гидрографии с сохранением результатов в каталог `../data/hydro`
+
+```
+python ./detect_hydro.py ../data/out_hydro ./weights/mask_rcnn_hydro_0115.h5 all ../data/raster/Kursk/Bing_19_3395.tif
+```
+
+3. Деактивировать окружение `open_rsai_detectors`
+
+```
+conda deactivate
+```
