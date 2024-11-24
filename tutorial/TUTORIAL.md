@@ -217,9 +217,23 @@ conda activate open_rsai_detectors
 ```
 python ./train_scripts/train_hydro.py ../data/hydro/markup/water_all/ ./weights/mask_rcnn_coco.h5
 ```
-Важно. Весовые коэффициенты при обучении будут сохранены в каталог "hydro`yyyyMMdd`T`HHmm`", где yyyy-MM-dd HH:mm - дата и время создания каталога.
+Весовые коэффициенты при обучении будут сохранены в каталог "hydro`yyyyMMdd`T`HHmm`", где yyyy-MM-dd HH:mm - дата и время начала обучения.
 
-3. Деактивировать окружение `open_rsai_detectors`
+Важно. Сохранение весовых коэффициентов для последующего тестирования требует 40Гб дискового пространства.
+
+Процесс обучения на GPU NVIDIA GeForce 4090 занимает ~24 часа.
+
+3. Выполнить тестирование сохраненных весовых коэффициентов 
+
+```
+python ./train_scripts/test_hydro.py ../data/hydro/markup/water_all/ ./"hydro20241024T0830" 1 150 not_save
+```
+
+Вместо имени каталога `hydro20241024T0830` необходимо подставить имя каталога весов, созданное в результате обучения.
+
+Важно. Процесс тестирования на GPU NVIDIA GeForce 4090 занимает ~10 часов.
+
+4. Деактивировать окружение `open_rsai_detectors`
 
 ```
 conda deactivate
@@ -234,35 +248,28 @@ conda deactivate
 conda activate open_rsai_detectors
 ```
 
-2. Запустить скрипт обучения детектора 
+2. Запустить скрипт обучения детектора.  
 
 ```
 python ./train_scripts/train_green.py ../data/hydro/markup/vegetation_all/ ./weights/mask_rcnn_coco.h5
 ```
 
-Важно. Весовые коэффициенты при обучении будут сохранены в каталог "green`yyyyMMdd`T`HHmm`", где yyyy-MM-dd HH:mm - дата и время создания каталога.
+Весовые коэффициенты при обучении будут сохранены в каталог "green`yyyyMMdd`T`HHmm`", где yyyy-MM-dd HH:mm - дата и время начала обучения.
 
-3. Деактивировать окружение `open_rsai_detectors`
+Важно. Сохранение весовых коэффициентов для последующего тестирования требует 40Гб дискового пространства.
+Процесс обучения на GPU NVIDIA GeForce 4090 занимает ~24 часа.
 
-```
-conda deactivate
-```
-
-## Детектирование гидрографии
-
-1. Активировать окружение `open_rsai_detectors`
+3. Выполнить тестирование сохраненных весовых коэффициентов 
 
 ```
-conda activate open_rsai_detectors
+python ./train_scripts/test_green.py ../data/hydro/markup/vegetation_all/ ./"green20241024T0830" 1 150 not_save
 ```
 
-2. Запустить скрипт детектирования гидрографии с сохранением результатов в каталог `../data/hydro`
+Вместо имени каталога `green20241024T0830` необходимо подставить имя каталога весов, созданное в результате обучения.
 
-```
-python ./detect_hydro.py ../data/out_hydro ./weights/mask_rcnn_hydro_0115.h5 all ../data/raster/Kursk/Bing_19_3395.tif
-```
+Важно. Процесс тестирования на GPU NVIDIA GeForce 4090 занимает ~10 часов.
 
-3. Деактивировать окружение `open_rsai_detectors`
+4. Деактивировать окружение `open_rsai_detectors`
 
 ```
 conda deactivate
