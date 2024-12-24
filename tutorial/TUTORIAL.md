@@ -7,7 +7,7 @@
 Общий процесс сборки и установки компонентов библиотеки включает следующие этапы:
 
 1. Установить зависимости ядра библиотеки OpenRSAI-Core: [пакеты операционной системы](https://github.com/miron77s/open_rsai#system-packages) и [Segment Anything для Python](https://github.com/miron77s/open_rsai#segment-anything).
-2. Установить [зависимости](https://github.com/miron77s/open_rsai_algos#installation) библиотеки алгоритмов OpenRSAI-Algos.
+2. Установить зависимости библиотеки алгоритмов [OpenRSAI-Algos](https://github.com/miron77s/open_rsai_algos#installation) и конвейера подготовки обучающей выборки [OpenRSAI-Markup](https://github.com/miron77s/open_rsai_markup?tab=readme-ov-file#requirements).
 3. В домашнем каталоге пользователя создать каталог `open_rsai_project` и подкаталог `src` для размещения исходных кодов:
 
 ```
