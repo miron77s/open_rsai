@@ -8,6 +8,15 @@ The OpenRSAI-Core library contains custom Eigen-powered geodata handlers, buildi
 
 This project requires a number of dependencies to be installed on your system. All instructions below are tailored for Ubuntu 22.04 users. If you are using a different operating system, please adjust the commands accordingly.
 
+## Structure
+
+The Open Remote Sensing AI Library Core is provided with the following extension repositories:
+
+1. The [OpenRSAI-Algos](https://github.com/miron77s/open_rsai_algos) adding trainable greenery and hydro detectors (this repo may be used as standalone).
+2. The [OpenRSAI-Markup](https://github.com/miron77s/open_rsai_markup) appending dataset preparing toolchains to train detectors.
+3. The [OpenRSAI-QGIS](https://github.com/miron77s/open_rsai_qgis_plugins) provides plugins to integrate OpenRSAI detectors into QGIS environment.
+4. The [OpenRSAI-Data](https://github.com/miron77s/open_rsai_data) contains vector and downloadable raster data for detectors training and demonstration purposes alone with QGIS project files for visualization.
+
 ### Hardware
 
 OpenRSAI-Core utilities can be run in both classic and AI modes:
