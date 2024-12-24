@@ -8,11 +8,11 @@
 
 1. Установить зависимости ядра библиотеки OpenRSAI-Core: [пакеты операционной системы](https://github.com/miron77s/open_rsai#system-packages) и [Segment Anything для Python](https://github.com/miron77s/open_rsai#segment-anything).
 2. Установить [зависимости](https://github.com/miron77s/open_rsai_algos#installation) библиотеки алгоритмов OpenRSAI-Algos.
-3. В домашнем каталоге пользователя создать каталог `open_rsai` и подкаталог `src` для размещения исходных кодов:
+3. В домашнем каталоге пользователя создать каталог `open_rsai_project` и подкаталог `src` для размещения исходных кодов:
 
 ```
-mkdir open_rsai
-cd open_rsai
+mkdir open_rsai_project
+cd open_rsai_project
 mkdir src
 cd src
 ```
@@ -32,7 +32,11 @@ cd  ..
 git clone https://github.com/miron77s/open_rsai_markup
 ```
 
-6. Перенести содержимое `open_rsai_markup` в каталог `open_rsai_algos`:
+6. При необходимости установить `rsync` и перенести содержимое `open_rsai_markup` в каталог `open_rsai_algos`:
+
+```
+sudo apt -y install rsync
+```
 
 ```
 rsync -av --exclude='.git' open_rsai_markup/ open_rsai_algos/
