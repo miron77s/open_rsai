@@ -210,8 +210,10 @@ qgis ../data/composite/vector_composite_on_raster.tif
 
 Выполнить и визуализировать результаты сопоставления детектированных объектов `updater.shp` c опорными данными `updating.shp` согласно маске сопоставления `update_mask.shp`:
 
+```
 ./map_updater -v ../data/buildings/vector/Kursk/eastern_industrial_w/updater.shp -u ../data/buildings/vector/Kursk/eastern_industrial_w/updating.shp -i ../data/buildings/vector/Kursk/eastern_industrial_w/update_mask.shp -o ../data/detect_differences/ --save_diff --save_updated
 qgis ../data/detect_differences/upcomming.shp ../data/detect_differences/outdated.shp
+```
 
 В результате формируется 2 карты: 
 - карта новых объектов `upcomming.shp`, не присутствовавших на опорной карте;
