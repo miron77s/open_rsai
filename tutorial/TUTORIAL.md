@@ -254,6 +254,31 @@ python ./train_scripts/test_hydro.py ../data/hydro/markup/water_all/ ./"hydro202
 conda deactivate
 ```
 
+## Построение карт гидрографии
+
+```
+conda activate open_rsai_detectors
+```
+
+2. Запустить скрипт детекторования гидрографии в заданной области `../data/hydro/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif`
+
+```
+python ./detect_hydro.py ../data/hydro/ ./weights/mask_rcnn_hydro_0115.h5 ../data/green/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
+```
+
+Важно. Результат будет сохранен в слое `hydro` каталога `../data/hydro/`. 
+
+3. Деактивировать окружение `open_rsai_detectors`
+
+```
+conda deactivate
+```
+
+4. Визуализировать результаты детектирования 
+
+```
+qgis ../data/raster/Kursk/Bing_19_3395.tif ../data/hydro/hydro.shp
+```
 
 ## Обучение и тестирование детектора растительности
 
@@ -288,4 +313,29 @@ python ./train_scripts/test_green.py ../data/hydro/markup/vegetation_all/ ./"gre
 
 ```
 conda deactivate
+```
+
+## Построение карт растительности
+
+```
+conda activate open_rsai_detectors
+```
+
+2. Запустить скрипт детекторования гидрографии в заданной области `../data/green/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif`
+
+```
+```
+
+Важно. Результат будет сохранен в слое `green` каталога `../data/green/`. 
+
+3. Деактивировать окружение `open_rsai_detectors`
+
+```
+conda deactivate
+```
+
+4. Визуализировать результаты детектирования 
+
+```
+qgis ../data/raster/Kursk/Bing_19_3395.tif ../data/green/green.shp
 ```
