@@ -28,7 +28,7 @@ OpenRSAI-Core utilities can be run in both classic and AI modes:
 
 ### System Packages
 
-Before installing the Python-specific dependencies, you need to install some system packages using `apt-get`. Open a terminal and run the following commands:
+- Before installing the Python-specific dependencies, you need to install some system packages using `apt-get`. Open a terminal and run the following commands:
 
 ```
 sudo apt-get update
@@ -36,21 +36,44 @@ sudo apt-get --yes install gcc g++ make cmake wget libgdal-dev libopencv-dev lib
 sudo apt-get --yes install python3 python3-pip git mesa-common-dev
 ```
 
+- Make sure you have [Anaconda](https://www.anaconda.com/products/individual) or [Miniconda](https://docs.conda.io/en/latest/miniconda.html) installed on your system to manage your environments and packages.
+
+Conda environment is required to provide the OpenRSAI-Core the specific versions of torch, numpy, opencv and etc and prevent conflicts with the system environment.
+
 ### Segment-Anything
 
-After installing the system packages, you can install the required Python packages using `pip`. It is recommended to use a virtual environment to avoid conflicts with system-wide packages.
+First create a Conda environment by running the following command:
 ```
-pip install setuptools opencv-python pycocotools matplotlib onnxruntime onnx --break-system-packages
+conda create -n open_rsai_core_sam python=3.11
+```  
+
+Important! The environment name is restricted to `open_rsai_core_sam` due it is used in OpenRSAI-Core code.
+
+Activate the newly created environment:
+
+```
+conda activate open_rsai_core_sam
+```
+
+Install the required Python packages using `pip`: 
+```
+pip install setuptools opencv-python pycocotools matplotlib onnxruntime onnx
 ```
 
 For PyTorch with CUDA 11.8 support, install the packages from the specified PyTorch wheel index:
 ```
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118 --break-system-packages
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
 ```
 
 Finally, install the `Segment-Anything` library directly from the repository:
 ```
-pip install git+https://github.com/facebookresearch/segment-anything.git --break-system-packages
+pip install git+https://github.com/facebookresearch/segment-anything.git
+```
+
+Deactivate the environment:
+
+```
+conda deactivate
 ```
 
 For more information about `Segment-Anything` setup, see the [Installation section](https://github.com/facebookresearch/segment-anything/blob/main/README.md#installation).
