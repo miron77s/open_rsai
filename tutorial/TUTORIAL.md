@@ -62,7 +62,7 @@ cmake --install build
 cd ..
 ```
 
-8. Установить QGIS согласно [инструкции](https://qgis.org/en/site/forusers/alldownloads.html#debian-ubuntu).
+8. Установить QGIS согласно [инструкции](https://qgis.org/en/site/forusers/alldownloads.html#debian-ubuntu), после чего ОБЯЗАТЕЛЬНО запустить QGIS (при первом запуске инициализируется каталог плагинов).
 
 9. Клонировать репозиторий инструментария OpenRSAI-QGIS и установить плагины:
 
@@ -324,6 +324,7 @@ conda activate open_rsai_detectors
 2. Запустить скрипт детекторования гидрографии в заданной области `../data/green/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif`
 
 ```
+python ./detect_green.py ../data/green/ ./weights/mask_rcnn_green_0073.h5 ../data/green/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
 ```
 
 Важно. Результат будет сохранен в слое `green` каталога `../data/green/`. 
