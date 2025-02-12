@@ -8,6 +8,8 @@ The OpenRSAI-Core library contains custom Eigen-powered geodata handlers, buildi
 
 This project requires a number of dependencies to be installed on your system. All instructions below are tailored for Ubuntu 22.04 users. If you are using a different operating system, please adjust the commands accordingly.
 
+The requirements setup guide for Ubuntu 22.04 is available [here](https://github.com/miron77s/open_rsai/blob/main/tutorial/REQUIREMENTS.md).
+
 ## Structure
 
 The Open Remote Sensing AI Library Core is provided with the following extension repositories:
