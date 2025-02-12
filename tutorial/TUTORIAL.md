@@ -136,7 +136,13 @@ cd ../bin
 
 ## Автоматическое построение карт зданий и сооружений
 
-1. Выполнить подготовку рабочей области для каждого из используемых для детектирования растров:
+1. Активировать окружение conda `open_rsai_core_sam`:
+
+```
+conda activate open_rsai_core_sam
+```
+
+2. Выполнить подготовку рабочей области для каждого из используемых для детектирования растров:
 
 ```
 ./raster_inliers_extractor -r ../data/raster/Kursk/Bing_19_3395.tif -v ../data/buildings/vector/osm/inliers.shp -i ../data/buildings/vector/Kursk/western_1/roi.shp -o ../data/buildings/vector/Kursk/western_1/ -f
@@ -146,7 +152,7 @@ cd ../bin
 ./objects_bounds_finder -r ../data/raster/Kursk/Yandex_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/inliers.shp --metadata ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/meta.shp -o ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/ --mask 50 --max_proj_length 80 -f
 ```
 
-2. Выполнить детектирование крыш зданий на снимках:
+3. Выполнить детектирование крыш зданий на снимках:
 
 ```
 ./roof_locator -r ../data/raster/Kursk/Bing_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Bing_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Bing_19_3395/ -f --use_sam
@@ -155,13 +161,13 @@ cd ../bin
 ./roof_locator -r ../data/raster/Kursk/Yandex_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/ -f --use_sam
 ```
 
-3. Провести мультипроекционную реконструкцию зданий и сооружений (с комплексированием):
+4. Провести мультипроекционную реконструкцию зданий и сооружений (с комплексированием):
 
 ```
 ./multiview_building_reconstructor -r ../data/raster/Kursk/Bing_19_3395.tif,../data/raster/Kursk/Google_19_3395.tif,../data/raster/Kursk/Mapbox_19_3395.tif,../data/raster/Kursk/Yandex_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Bing_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Google_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/roofs.shp,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/roofs.shp -b ../data/buildings/vector/Kursk/western_1/Bing_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Google_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/bounds.shp,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Bing_19_3395/,../data/buildings/vector/Kursk/western_1/Google_19_3395/,../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/,../data/buildings/vector/Kursk/western_1/Yandex_19_3395/ -f --height_factor 0.4
 ```
 
-4. Проверить результаты детектирования и реконструкции в QGIS, последовательно выполняя следующие команды:
+5. Проверить результаты детектирования и реконструкции в QGIS, последовательно выполняя следующие команды:
 
 ```
 qgis --code ../data/buildings/vector/Kursk/western_1/Bing_19_3395/open_in_qgis.py
@@ -176,6 +182,12 @@ qgis --code ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/open_in_qgis
 qgis --code ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/open_in_qgis.py
 ```
 В процессе проверки убедиться в наличии значений высот объектов (поле "height") в слоях "projes" и "shades".
+
+6. Отключить окружение conda:
+
+```
+conda deactivate
+```
 
 ## Создание мультивременных композитных изображений
 

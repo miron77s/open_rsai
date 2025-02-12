@@ -92,13 +92,10 @@ bool rsai::sam_segmentor::operator () ( const ProgressFunc &progress_func )
     if ( !verified )
         return false;
 
-    const std::string segment_script_env_name = "open_rsai_core_sam";
-    const std::string segment_script_env_activate = "conda activate " + segment_script_env_name;
-    const std::string segment_script_env_deactivate = "conda deactivate";
     const std::string segment_script = "python3 ./scripts/sam_binary_segments.py";
     const std::string weights_file = "./weights/sam_vit_h_4b8939.pth";
-    const std::string command = segment_script_env_activate + " && " + segment_script + " " + weights_file + " "
-                                + m_store_dir + " " + DEFAULT_SEG_ANY_EDGES_WIDTH_VALUE + " && " + segment_script_env_deactivate;
+    const std::string command = segment_script + " " + weights_file + " "
+                                + m_store_dir + " " + DEFAULT_SEG_ANY_EDGES_WIDTH_VALUE;
 
     const int result = system(command.c_str());
 

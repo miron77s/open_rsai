@@ -44,7 +44,7 @@ Conda environment is required to provide the OpenRSAI-Core the specific versions
 
 First create a Conda environment by running the following command:
 ```
-conda create -n open_rsai_core_sam python=3.11
+conda create -n open_rsai_core_sam python=3.11 numpy=1.26
 ```  
 
 Important! The environment name is restricted to `open_rsai_core_sam` due it is used in OpenRSAI-Core code.
@@ -55,9 +55,14 @@ Activate the newly created environment:
 conda activate open_rsai_core_sam
 ```
 
+Install GDAL library to handle SAM-2-WKT geometry conversion:
+```
+conda install gdal  
+```
+
 Install the required Python packages using `pip`: 
 ```
-pip install setuptools opencv-python pycocotools matplotlib onnxruntime onnx
+pip install setuptools opencv-python pycocotools matplotlib onnxruntime onnx tqdm
 ```
 
 For PyTorch with CUDA 11.8 support, install the packages from the specified PyTorch wheel index:
