@@ -66,9 +66,18 @@ cmake --install build
 cd ..
 ```
 
-8. Установить QGIS согласно [инструкции](https://qgis.org/en/site/forusers/alldownloads.html#debian-ubuntu), после чего ОБЯЗАТЕЛЬНО запустить QGIS (при первом запуске инициализируется каталог плагинов).
+8. Установить алгоритмы детектирования объектов местности:
 
-9. Клонировать репозиторий инструментария OpenRSAI-QGIS и установить плагины:
+```
+conda activate open_rsai_detectors
+cd open_rsai_algos/mrcnn_library
+python setup.py install
+conda deactivate
+```
+
+9. Установить QGIS согласно [инструкции](https://qgis.org/en/site/forusers/alldownloads.html#debian-ubuntu), после чего ОБЯЗАТЕЛЬНО запустить QGIS (при первом запуске инициализируется каталог плагинов).
+
+10. Клонировать репозиторий инструментария OpenRSAI-QGIS и установить плагины:
 
 ```
 git clone https://github.com/miron77s/open_rsai_qgis_plugins
@@ -77,11 +86,11 @@ sh install.sh
 cd ..
 ```
 
-10. Добавить установленные плагины в инструментарий QGIS согласно [инструкции](https://github.com/miron77s/open_rsai_qgis_plugins#4-activating-plugins-in-qgis).
+11. Добавить установленные плагины в инструментарий QGIS согласно [инструкции](https://github.com/miron77s/open_rsai_qgis_plugins#4-activating-plugins-in-qgis).
 
-11. Установить необходимые пакеты операционной системы для распаковки обучающих данных согласно [инструкции OpenRSAI-Data](https://github.com/miron77s/open_rsai_data#requirements). 
+12. Установить необходимые пакеты операционной системы для распаковки обучающих данных согласно [инструкции OpenRSAI-Data](https://github.com/miron77s/open_rsai_data#requirements). 
 
-12. Клонировать репозиторий обучающих данных OpenRSAI-Data, загрузить данные для обучения и тестирования инструментов библиотеки:
+13. Клонировать репозиторий обучающих данных OpenRSAI-Data, загрузить данные для обучения и тестирования инструментов библиотеки:
 
 ```
 cd ../distr
@@ -222,7 +231,7 @@ qgis ../data/raster/Kursk/Bing_19_3395.tif ../data/composite/vector_composite.ti
 sh ./scripts/vector_composer.sh ../data/buildings/vector/Kursk/eastern_industrial_w/updater.shp ../data/buildings/vector/Kursk/eastern_industrial_w/updating.shp ../data/composite/ vector_composite_on_raster "4033053.7 6720432.3 4034968.2 6718771.9" ../data/raster/Kursk/Bing_19_3395.tif
 qgis ../data/composite/vector_composite_on_raster.tif
 ```
-## Cопоставление детектированных объектов с опорной цифровой
+## Cопоставление детектированных объектов с опорной цифровой картой
 
 Выполнить и визуализировать результаты сопоставления детектированных объектов `updater.shp` c опорными данными `updating.shp` согласно маске сопоставления `update_mask.shp`:
 
@@ -252,17 +261,17 @@ python ./train_scripts/train_hydro.py ../data/hydro/markup/water_all/ ./weights/
 
 Важно. Сохранение весовых коэффициентов для последующего тестирования требует 40Гб дискового пространства.
 
-Процесс обучения на GPU NVIDIA GeForce 4090 занимает ~24 часа.
+Процесс обучения на GPU NVIDIA GeForce 4090 занимает 7-8 часов.
 
 3. Выполнить тестирование сохраненных весовых коэффициентов 
 
 ```
-python ./train_scripts/test_hydro.py ../data/hydro/markup/water_all/ ./"hydro20241024T0830" 1 150 not_save
+python ./train_scripts/test_hydro.py ../data/hydro/markup/water_all/ ./"hydro20241024T0830/" 1 150 not_save
 ```
 
-Вместо имени каталога `hydro20241024T0830` необходимо подставить имя каталога весов, созданное в результате обучения.
+Вместо имени каталога `hydro20241024T0830` необходимо подставить имя каталога весов, созданного в результате обучения.
 
-Важно. Процесс тестирования на GPU NVIDIA GeForce 4090 занимает ~10 часов.
+Важно. Процесс тестирования на GPU NVIDIA GeForce 4090 занимает ~2 часа.
 
 4. Деактивировать окружение `open_rsai_detectors`
 
@@ -276,11 +285,17 @@ conda deactivate
 conda activate open_rsai_detectors
 ```
 
-2. Запустить скрипт детекторования гидрографии в заданной области `../data/hydro/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif`
+2. Запустить скрипт детекторования гидрографии в заданной области `../data/hydro/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif` для предустановленной модели:
 
 ```
-python ./detect_hydro.py ../data/hydro/ ./weights/mask_rcnn_hydro_0115.h5 ../data/green/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
+python ./detect_hydro.py ../data/hydro/ ./weights/mask_rcnn_hydro_0115.h5 ../data/hydro/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
 ```
+
+или для созданной на этапе обучения 
+```
+python ./detect_hydro.py ../data/hydro/ ./"hydro20241024T0830/mask_rcnn_hydro_0150.h5 ../data/hydro/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
+```
+где вместо имени каталога `hydro20241024T0830` необходимо подставить имя каталога весов, созданного в результате обучения, а также выбрать файл модели `mask_rcnn_hydro_****.h5` соответствующий лучшей по статистике тестирования эпохе.
 
 Важно. Результат будет сохранен в слое `hydro` каталога `../data/hydro/`. 
 
@@ -307,23 +322,23 @@ conda activate open_rsai_detectors
 2. Запустить скрипт обучения детектора.  
 
 ```
-python ./train_scripts/train_green.py ../data/hydro/markup/vegetation_all/ ./weights/mask_rcnn_coco.h5
+python ./train_scripts/train_green.py ../data/green/markup/vegetation_all/ ./weights/mask_rcnn_coco.h5
 ```
 
 Весовые коэффициенты при обучении будут сохранены в каталог "green`yyyyMMdd`T`HHmm`", где yyyy-MM-dd HH:mm - дата и время начала обучения.
 
 Важно. Сохранение весовых коэффициентов для последующего тестирования требует 40Гб дискового пространства.
-Процесс обучения на GPU NVIDIA GeForce 4090 занимает ~24 часа.
+Процесс обучения на GPU NVIDIA GeForce 4090 занимает ~7-8 часов.
 
 3. Выполнить тестирование сохраненных весовых коэффициентов 
 
 ```
-python ./train_scripts/test_green.py ../data/hydro/markup/vegetation_all/ ./"green20241024T0830" 1 150 not_save
+python ./train_scripts/test_green.py ../data/green/markup/vegetation_all/ ./"green20241024T0830/" 1 150 not_save
 ```
 
-Вместо имени каталога `green20241024T0830` необходимо подставить имя каталога весов, созданное в результате обучения.
+Вместо имени каталога `green20241024T0830` необходимо подставить имя каталога весов, созданного в результате обучения.
 
-Важно. Процесс тестирования на GPU NVIDIA GeForce 4090 занимает ~10 часов.
+Важно. Процесс тестирования на GPU NVIDIA GeForce 4090 занимает ~2 часа.
 
 4. Деактивировать окружение `open_rsai_detectors`
 
@@ -337,11 +352,16 @@ conda deactivate
 conda activate open_rsai_detectors
 ```
 
-2. Запустить скрипт детекторования гидрографии в заданной области `../data/green/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif`
+2. Запустить скрипт детекторования гидрографии в заданной области `../data/green/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif` для предустановленной модели:
 
 ```
 python ./detect_green.py ../data/green/ ./weights/mask_rcnn_green_0073.h5 ../data/green/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
 ```
+или для созданной на этапе обучения:
+```
+python ./detect_green.py ../data/green/ ./"green20241024T0830/mask_rcnn_green_0150.h5 ../data/green/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
+```
+где вместо имени каталога `green20241024T0830` необходимо подставить имя каталога весов, созданного в результате обучения, а также выбрать файл модели `mask_rcnn_green_****.h5` соответствующий лучшей по статистике тестирования эпохе.
 
 Важно. Результат будет сохранен в слое `green` каталога `../data/green/`. 
 
