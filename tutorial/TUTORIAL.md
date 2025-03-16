@@ -293,7 +293,7 @@ python ./detect_hydro.py ../data/hydro/ ./weights/mask_rcnn_hydro_0115.h5 ../dat
 
 или для созданной на этапе обучения 
 ```
-python ./detect_hydro.py ../data/hydro/ ./"hydro20241024T0830/mask_rcnn_hydro_0150.h5 ../data/hydro/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
+python ./detect_hydro.py ../data/hydro/ ./hydro20241024T0830/mask_rcnn_hydro_0150.h5 ../data/hydro/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
 ```
 где вместо имени каталога `hydro20241024T0830` необходимо подставить имя каталога весов, созданного в результате обучения, а также выбрать файл модели `mask_rcnn_hydro_****.h5` соответствующий лучшей по статистике тестирования эпохе.
 
@@ -359,7 +359,7 @@ python ./detect_green.py ../data/green/ ./weights/mask_rcnn_green_0073.h5 ../dat
 ```
 или для созданной на этапе обучения:
 ```
-python ./detect_green.py ../data/green/ ./"green20241024T0830/mask_rcnn_green_0150.h5 ../data/green/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
+python ./detect_green.py ../data/green/ ./green20241024T0830/mask_rcnn_green_0150.h5 ../data/green/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
 ```
 где вместо имени каталога `green20241024T0830` необходимо подставить имя каталога весов, созданного в результате обучения, а также выбрать файл модели `mask_rcnn_green_****.h5` соответствующий лучшей по статистике тестирования эпохе.
 
