@@ -112,11 +112,12 @@ mrcnn.open_rsai_detect.coverage(output_path, weights_file, work_region_shp, path
 ```
 import mrcnn.open_rsai_detect
 from mrcnn.config import Config
+from mrcnn.open_rsai_config import GREEN_CLASS_NAMES
 
 class MultiGPUConfig(Config):
     NAME = "green"
     IMAGES_PER_GPU = 1
-    GPU_COUNT = 4
+    GPU_COUNT = 1
     NUM_CLASSES = len(GREEN_CLASS_NAMES)
     STEPS_PER_EPOCH = 600
     VALIDATION_STEPS = 20
@@ -247,7 +248,7 @@ import mrcnn.open_rsai_train
 
 class CustomTrainConfig(GreeneryTrainConfig):
     IMAGES_PER_GPU = 2
-    GPU_COUNT = 4
+    GPU_COUNT = 1
     BACKBONE = "resnet50"
 
 dataset_dir     = '../data/green/markup/vegetation_all/'
