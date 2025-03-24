@@ -30,7 +30,7 @@ import mrcnn.model
 import mrcnn.visualize
 
 # Загрузка стандартного профился детектирования растительности
-from mrcnn.open_rsai_config import GreeneryConfig
+from mrcnn.open_rsai_config import GreeneryDetectConfig
 
 # Файл весовых коэффициентов
 weights_path = "./weights/mask_rcnn_green_0073.h5"
@@ -38,7 +38,7 @@ weights_path = "./weights/mask_rcnn_green_0073.h5"
 # Создание модели в режиме детектирования, загрузка весов
 model = mrcnn.model.MaskRCNN(
     mode="inference",
-    config=GreeneryConfig(),
+    config=GreeneryDetectConfig(),
     model_dir=os.getcwd()
 )
 
