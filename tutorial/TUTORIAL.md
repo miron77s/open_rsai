@@ -4,7 +4,7 @@
 
 ## Установка необходимых драйверов и библиотек
 
-Сборка и использование библиотеки требует наличия драйвера графического ускорителя NVIDIA, инструментария CUDA и библиотеки CUDNN. Развернутое описание их установки установки приведено в [руководстве по подготовке ОС Ubuntu 22.04](https://github.com/miron77s/open_rsai/blob/main/tutorial/REQUIREMENTS.md).    
+Сборка и использование библиотеки требует наличия драйвера графического ускорителя NVIDIA, инструментария CUDA и библиотеки CUDNN. Развернутое описание их установки приведено в [руководстве по подготовке ОС Ubuntu 22.04](https://github.com/miron77s/open_rsai/blob/main/tutorial/REQUIREMENTS.md).    
 
 ## Минимальные технические требования
 
@@ -77,7 +77,7 @@ conda deactivate
 
 9. Установить QGIS согласно [инструкции](https://qgis.org/en/site/forusers/alldownloads.html#debian-ubuntu), после чего ОБЯЗАТЕЛЬНО запустить QGIS (при первом запуске инициализируется каталог плагинов).
 
-10. Клонировать репозиторий инструментария OpenRSAI-QGIS и установить плагины:
+10. Клонировать репозиторий инструментария [OpenRSAI-QGIS](https://github.com/miron77s/open_rsai_qgis_plugins) и установить плагины:
 
 ```
 git clone https://github.com/miron77s/open_rsai_qgis_plugins
@@ -90,7 +90,7 @@ cd ..
 
 12. Установить необходимые пакеты операционной системы для распаковки обучающих данных согласно [инструкции OpenRSAI-Data](https://github.com/miron77s/open_rsai_data#requirements). 
 
-13. Клонировать репозиторий обучающих данных OpenRSAI-Data, загрузить данные для обучения и тестирования инструментов библиотеки:
+13. Клонировать репозиторий обучающих данных [OpenRSAI-Data](https://github.com/miron77s/open_rsai_data), загрузить данные для обучения и тестирования инструментов библиотеки:
 
 ```
 cd ../distr
@@ -145,7 +145,7 @@ cd ../bin
 ./darknet detector test ../data/buildings/markup_roofs/rsai.data ./weights/yolov4-buildings-15k.cfg ./weights/yolov4-buildings-15k_final.weights ../data/buildings/markup_roofs/valid/Kursk_Bing_19_3395_7914.jpg 
 ```
 
-Важно. Нумерация изображения в сгенерированной выборке может отличаться, поэтому в случае отсутсвия снимка `Kursk_Bing_19_3395_7914.jpg` следует использовать любой другой из каталога `../data/buildings/markup_roofs/valid/` с непустым файлом аннотации `Kursk_Bing_19_3395_NNNN.txt` (значит на изображении должны присутствовать зданий или сооружения).
+Важно. Нумерация изображения в сгенерированной выборке может отличаться, поэтому в случае отсутствия снимка `Kursk_Bing_19_3395_7914.jpg` следует использовать любой другой из каталога `../data/buildings/markup_roofs/valid/` с непустым файлом аннотации `Kursk_Bing_19_3395_NNNN.txt` (значит на изображении должны присутствовать размеченные здания или сооружения).
 
 ## Автоматическое построение карт зданий и сооружений
 
@@ -259,7 +259,7 @@ python ./train_scripts/train_hydro.py ../data/hydro/markup/water_all/ ./weights/
 ```
 Весовые коэффициенты при обучении будут сохранены в каталог "hydro`yyyyMMdd`T`HHmm`", где yyyy-MM-dd HH:mm - дата и время начала обучения.
 
-Важно. Сохранение весовых коэффициентов для последующего тестирования требует 40Гб дискового пространства.
+Важно. Сохранение весовых коэффициентов для последующего тестирования требует дополнительно 39Гб свободного дискового пространства.
 
 Процесс обучения на GPU NVIDIA GeForce 4090 занимает 7-8 часов.
 
@@ -273,19 +273,9 @@ python ./train_scripts/test_hydro.py ../data/hydro/markup/water_all/ ./"hydro202
 
 Важно. Процесс тестирования на GPU NVIDIA GeForce 4090 занимает ~2 часа.
 
-4. Деактивировать окружение `open_rsai_detectors`
-
-```
-conda deactivate
-```
-
 ## Построение карт гидрографии
 
-```
-conda activate open_rsai_detectors
-```
-
-2. Запустить скрипт детекторования гидрографии в заданной области `../data/hydro/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif` для предустановленной модели:
+1. Запустить скрипт детекторования гидрографии в заданной области `../data/hydro/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif` для предустановленной модели:
 
 ```
 python ./detect_hydro.py ../data/hydro/ ./weights/mask_rcnn_hydro_0115.h5 ../data/hydro/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
@@ -299,13 +289,13 @@ python ./detect_hydro.py ../data/hydro/ ./hydro20241024T0830/mask_rcnn_hydro_015
 
 Важно. Результат будет сохранен в слое `hydro` каталога `../data/hydro/`. 
 
-3. Деактивировать окружение `open_rsai_detectors`
+2. Деактивировать окружение `open_rsai_detectors`
 
 ```
 conda deactivate
 ```
 
-4. Визуализировать результаты детектирования 
+3. Визуализировать результаты детектирования 
 
 ```
 qgis ../data/raster/Kursk/Bing_19_3395.tif ../data/hydro/hydro.shp
@@ -319,7 +309,7 @@ qgis ../data/raster/Kursk/Bing_19_3395.tif ../data/hydro/hydro.shp
 conda activate open_rsai_detectors
 ```
 
-2. Запустить скрипт обучения детектора.  
+2. Запустить скрипт обучения детектора  
 
 ```
 python ./train_scripts/train_green.py ../data/green/markup/vegetation_all/ ./weights/mask_rcnn_coco.h5
@@ -327,7 +317,7 @@ python ./train_scripts/train_green.py ../data/green/markup/vegetation_all/ ./wei
 
 Весовые коэффициенты при обучении будут сохранены в каталог "green`yyyyMMdd`T`HHmm`", где yyyy-MM-dd HH:mm - дата и время начала обучения.
 
-Важно. Сохранение весовых коэффициентов для последующего тестирования требует 40Гб дискового пространства.
+Важно. Сохранение весовых коэффициентов для последующего тестирования требует дополнительно 39Гб свободного дискового пространства.
 Процесс обучения на GPU NVIDIA GeForce 4090 занимает ~7-8 часов.
 
 3. Выполнить тестирование сохраненных весовых коэффициентов 
@@ -340,19 +330,9 @@ python ./train_scripts/test_green.py ../data/green/markup/vegetation_all/ ./"gre
 
 Важно. Процесс тестирования на GPU NVIDIA GeForce 4090 занимает ~2 часа.
 
-4. Деактивировать окружение `open_rsai_detectors`
-
-```
-conda deactivate
-```
-
 ## Построение карт растительности
 
-```
-conda activate open_rsai_detectors
-```
-
-2. Запустить скрипт детекторования гидрографии в заданной области `../data/green/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif` для предустановленной модели:
+1. Запустить скрипт детекторования гидрографии в заданной области `../data/green/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif` для предустановленной модели:
 
 ```
 python ./detect_green.py ../data/green/ ./weights/mask_rcnn_green_0073.h5 ../data/green/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
@@ -365,13 +345,13 @@ python ./detect_green.py ../data/green/ ./green20241024T0830/mask_rcnn_green_015
 
 Важно. Результат будет сохранен в слое `green` каталога `../data/green/`. 
 
-3. Деактивировать окружение `open_rsai_detectors`
+2. Деактивировать окружение `open_rsai_detectors`
 
 ```
 conda deactivate
 ```
 
-4. Визуализировать результаты детектирования 
+3. Визуализировать результаты детектирования 
 
 ```
 qgis ../data/raster/Kursk/Bing_19_3395.tif ../data/green/green.shp
