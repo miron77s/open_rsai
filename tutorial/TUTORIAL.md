@@ -168,10 +168,10 @@ conda activate open_rsai_core_sam
 3. Выполнить детектирование крыш зданий на снимках:
 
 ```
-./roof_locator -r ../data/raster/Kursk/Bing_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Bing_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Bing_19_3395/ -f --use_sam
-./roof_locator -r ../data/raster/Kursk/Google_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Google_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Google_19_3395/ -f --use_sam
-./roof_locator -r ../data/raster/Kursk/Mapbox_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/ -f --use_sam
-./roof_locator -r ../data/raster/Kursk/Yandex_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/ -f --use_sam
+./roof_locator -r ../data/raster/Kursk/Bing_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Bing_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Bing_19_3395 -f --use_sam
+./roof_locator -r ../data/raster/Kursk/Google_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Google_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Google_19_3395 -f --use_sam
+./roof_locator -r ../data/raster/Kursk/Mapbox_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Mapbox_19_3395 -f --use_sam
+./roof_locator -r ../data/raster/Kursk/Yandex_19_3395.tif -v ../data/buildings/vector/Kursk/western_1/Yandex_19_3395/bounds.shp -o ../data/buildings/vector/Kursk/western_1/Yandex_19_3395 -f --use_sam
 ```
 
 4. Провести мультипроекционную реконструкцию зданий и сооружений (с комплексированием):
