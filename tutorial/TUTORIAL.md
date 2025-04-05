@@ -73,6 +73,7 @@ conda activate open_rsai_detectors
 cd open_rsai_algos/mrcnn_library
 python setup.py install
 conda deactivate
+cd ../..
 ```
 
 9. Установить QGIS согласно [инструкции](https://qgis.org/en/site/forusers/alldownloads.html#debian-ubuntu), после чего ОБЯЗАТЕЛЬНО запустить QGIS (при первом запуске инициализируется каталог плагинов).

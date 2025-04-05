@@ -105,6 +105,17 @@ Make sure that CUDA library binaries are available in `LD_LIBRARY_PATH` overvise
 ```
 export LD_LIBRARY_PATH=/usr/local/cuda-11.8/compat/:$LD_LIBRARY_PATH
 ```
+## Tutorial
+
+The repository contains a [complete tutorial](https://github.com/miron77s/open_rsai/blob/main/tutorial/TUTORIAL.md) to download, compile and install OpenRSAI library and to train and apply terrain object detectors.
+
+## Examples
+
+The examples and scenarios to use OpenRSAI terrain object detectors in custom code are provided in the [examples list](https://github.com/miron77s/open_rsai/blob/main/tutorial/EXAMPLES.md).
+
+## Application fields
+
+The OpenRSAI library practical application fields are provided [here](https://github.com/miron77s/open_rsai/blob/main/tutorial/APPLICATIONS.md).
 
 ## Special Thanks
 
