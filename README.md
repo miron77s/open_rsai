@@ -45,7 +45,7 @@ Conda environment is required to provide the OpenRSAI-Core the specific versions
 
 First create a Conda environment by running the following command:
 ```
-conda create -n open_rsai_core_sam python=3.11 numpy=1.26
+conda create -n open_rsai_core_sam python=3.11
 ```  
 
 Important! The environment name is restricted to `open_rsai_core_sam` due it is used in OpenRSAI-Core code.
