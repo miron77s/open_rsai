@@ -37,10 +37,18 @@ for file in tqdm(jpg_files):
     edges_file_name = f"{directory_name}/{file}_edges.jpg"
     segms_file_name = f"{directory_name}/{file}_segms.jpg"
     wkt_file_name = f"{directory_name}/{file}.wkt"
+    
     if not os.path.isfile(edges_file_name) or not os.path.isfile(segms_file_name) or not os.path.isfile(wkt_file_name):
+        # Read the image using OpenCV
         image = cv2.imread(f"{directory_name}/{file}.jpg")
+        
+        # Convert from BGR to RGB
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        
+        # No need to convert to tensor or normalize, we pass the image directly
+        # Generate the masks
         masks = mask_generator.generate(image)
+        
         edges = su.draw_contours(masks, edges_width)
         cv2.imwrite(edges_file_name, edges)
         segmented = su.draw_segments(masks)
