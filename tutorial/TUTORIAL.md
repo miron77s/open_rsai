@@ -279,7 +279,7 @@ python ./train_scripts/test_hydro.py ../data/hydro/markup/water_all/ ./"hydro202
 1. Запустить скрипт детекторования гидрографии в заданной области `../data/hydro/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif` для предустановленной модели:
 
 ```
-python ./detect_hydro.py ../data/hydro/ ./weights/mask_rcnn_hydro_0115.h5 ../data/hydro/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
+python ./detect_hydro.py ../data/hydro/ ./weights/mask_rcnn_hydro.h5 ../data/hydro/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
 ```
 
 или для созданной на этапе обучения 
@@ -336,7 +336,7 @@ python ./train_scripts/test_green.py ../data/green/markup/vegetation_all/ ./"gre
 1. Запустить скрипт детекторования гидрографии в заданной области `../data/green/vector/roi/roi.shp` снимка `../data/raster/Kursk/Bing_19_3395.tif` для предустановленной модели:
 
 ```
-python ./detect_green.py ../data/green/ ./weights/mask_rcnn_green_0073.h5 ../data/green/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
+python ./detect_green.py ../data/green/ ./weights/mask_rcnn_green.h5 ../data/green/vector/roi/roi.shp ../data/raster/Kursk/Bing_19_3395.tif
 ```
 или для созданной на этапе обучения:
 ```
